@@ -1,0 +1,7 @@
+{
+  "welcomeTitle":"Welcome",
+  "@welcomeTitle": {
+    "description": "First message in the app"
+  },
+  "login": "Login"
+}
