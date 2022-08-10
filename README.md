@@ -41,42 +41,7 @@ structure of the project. Here will be explained directory structure, navigation
 
 
 #### Navigation
-For our projects we use Flutter Navigation 2.0 with cubit state management. 
-For editing and setting new screens, the most important file is router_delegate.dart (/lib/config/router/)  file and pages 
-directory (/lib/config/router/pages). In router_delegate we need to define which page will be navigate 
-based on cubit_state. 
-Example:  
-pages = [
-            const LoginPage(),
-            if (authState.myRoute == MyRoute.signup)
-              const SignUpPage(
-                  // onSignUp: onLogin
-                  )
-          ];
-        }
-Every screen we also should create first in pages directory, where we extend Page widget with unique 
-key value and return MaterialPageRoute with our own created Screen. We use Page, because Navigation 2.0 
-is working with Page widget. 
-Example:
-class LoginPage extends Page {
-  
-
-  const LoginPage() : super(key: const ValueKey('LoginPage'));
-
-  @override
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-        settings: this,
-        builder: (_) => BlocProvider<LoginCubit>(
-              create: (context) => LoginCubit(),
-              child: const LoginScreen(),
-            ));
-  }
-}
-
-Recommended resources:
-https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade
-https://docs.google.com/document/d/1Q0jx0l4-xymph9O6zLaOY4d_f7YFpNWX_eGbzYxr9wY/edit
+Use GoRouter https://gorouter.dev/
 
 ##### Localization
 In directory l10n (lib/l10n) we create .arb files for specific language. Every constant text 
@@ -101,13 +66,7 @@ Recommended resources:
 https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
 ###### State Management
-In Flutter Apps we use Cubit as our State Management. 
-We divide them in two sections, such as global and local cubits.
-Global cubits represents state which spread throughout the hall app. In our case it is RouteCubit
-and AuthCubit. So if we change state in those two Cubits, it will affect the navigation. 
-
-Recommended link: 
-https://medium.com/flutterdevs/cubit-state-management-flutter-d372ec0044f7
+Prefer use Provider https://pub.dev/packages/provider
 
 ####### Other useful links for this project
 https://pub.dev/packages/flutter_native_splash - for splash screen
