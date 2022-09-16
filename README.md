@@ -66,7 +66,9 @@ Recommended resources:
 https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
 ###### State Management
-Prefer use Provider https://pub.dev/packages/provider
+Prefer use Provider https://pub.dev/packages/provider but you also can use Bloc because Bloc is based on Provider,
+There is example in this codebase.
+
 
 ####### Other useful links for this project
 https://pub.dev/packages/flutter_native_splash - for splash screen
