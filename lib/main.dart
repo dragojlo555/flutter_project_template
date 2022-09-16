@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -7,6 +8,7 @@ import './styles/themes.dart';
 import 'config/router/router.dart';
 import 'features/core/auth/viewmodel/auth_view_model.dart';
 import 'features/core/settings/viewmodel/settings_view_model.dart';
+import 'features/dumy_feature/viewmodel/home_screen_cubit.dart';
 import 'utils/services/local_storage/shared_preferences_helper.dart';
 
 void main() async {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
 
   late final GoRouter mg_router = GoRouter(
       initialLocation: '/',
-      routes: PEAKRoutes,
+      routes: appRoutes,
       redirect: (state) {
         //   print('REGISTRATION STATUSL ' + state.location);
         //   if (state.location == '/' && registrationViewModel.registrationStatus != RegistrationStatus.REGISTER) {
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (_) => authService,
           ),
+          BlocProvider<HomeScreenCubit>(create: (context) => HomeScreenCubit()),
           ChangeNotifierProvider(
             create: (_) => settingsViewModel,
           ),
@@ -60,6 +63,7 @@ class MyApp extends StatelessWidget {
 
 class MainWidget extends StatelessWidget {
   final GoRouter router;
+
   const MainWidget({Key? key, required this.router}) : super(key: key);
 
   @override
@@ -74,6 +78,7 @@ class MainWidget extends StatelessWidget {
       themeMode: ThemeMode.light,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }

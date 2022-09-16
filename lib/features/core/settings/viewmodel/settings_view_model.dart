@@ -1,7 +1,7 @@
 import '../../../../base/model_view_base.dart';
 import '../../../../utils/services/local_storage/shared_preferences_helper.dart';
 
-class SettingsViewModel extends ModelViewBase {
+class SettingsViewModel extends ViewModelBase {
   String? _languageCode;
 
   SettingsViewModel(String? languageCode) {

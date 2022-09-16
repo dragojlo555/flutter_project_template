@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import '../models/core/failure_model.dart';
 
-class ModelViewBase extends ChangeNotifier {
+class ViewModelBase extends ChangeNotifier {
   bool _isLoading = false;
   Failure? _failure;
 

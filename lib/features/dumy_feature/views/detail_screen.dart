@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/auth/viewmodel/auth_view_model.dart';
+import '../viewmodel/home_screen_cubit.dart';
+import '../viewmodel/home_screen_state.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final int idUser;
+  const DetailScreen({Key? key, required this.idUser}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      backgroundColor: Colors.red,
       body: Column(
         children: [
           const Center(
-            child: Text('Ovo je Detail Screen'),
+            child: Text('This is Detail Screen'),
           ),
           ElevatedButton(
               onPressed: () {
@@ -24,10 +26,27 @@ class DetailScreen extends StatelessWidget {
               child: const Text('Back to home')),
           ElevatedButton(
             onPressed: () {
-              context.pop();
+              GoRouter.of(context).pop();
             },
             child: const Text('BACK'),
           ),
+          SizedBox(
+            height: 100,
+            child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return Card(
+                  child: Column(
+                    children: [
+                      Text(state.userList?.entries[idUser].name ?? ''),
+                      Text(state.userList?.entries[idUser].username ?? ''),
+                      Text(state.userList?.entries[idUser].email ?? ''),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
         ],
       ),
     );

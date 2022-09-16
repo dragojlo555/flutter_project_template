@@ -5,7 +5,7 @@ enum AuthCubitStatus { unknown, authenticated, unauthenticated }
 
 AuthCubitStatus _authCubitStatus = AuthCubitStatus.unknown;
 
-class AuthViewModel extends ModelViewBase {
+class AuthViewModel extends ViewModelBase {
   AuthViewModel(String? token) {
     if (token != null && token.isNotEmpty) {
       _authCubitStatus = AuthCubitStatus.authenticated;

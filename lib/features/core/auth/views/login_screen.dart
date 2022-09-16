@@ -7,17 +7,14 @@ import '../../../../common/widgets/button.dart';
 import '../../../../common/widgets/dialogs/progress_indicator.dart';
 import '../../../../constants/const_widgets.dart';
 import '../viewmodel/auth_view_model.dart';
-import '../viewmodel/login_view_model.dart';
-import '../widgets/body.dart';
 import '../../../../utils/validators/validators.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-
     void _login() async {
       showDialog(
         context: context,
@@ -33,79 +30,83 @@ class LoginScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: CustomScrollView(
-        //Instead of ListView or SingleChildScrollView put CustomScrollVIew to use Expanded or spacer
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ConstWidgets.mSpacer,
-                Image.asset(
-                  'assets/images/logo_1000.png',
-                  width: 100,
-                  height: 100,
-                ),
-                const Spacer(),
-                Form(
-                  key: _formKey,
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 40),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.end,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context).welcomeTitle,
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        _emailField(context),
-                        ConstWidgets.mSpacer,
-                        _passwordField(context),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Button(
-                              buttonText: AppLocalizations.of(context).login,
-                              onPressed: () {
-                                if (!_formKey.currentState!.validate()) {
-                                  return;
-                                }
-                                _login();
-                              }),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Button(
-                            buttonText: "Sign Up",
-                            onPressed: () {
-                              context.go('/login/registration');
-                            },
+        appBar: AppBar(
+          title: const Text('Log In'),
+        ),
+        body: CustomScrollView(
+          //Instead of ListView or SingleChildScrollView put CustomScrollVIew to use Expanded or spacer
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Image.asset(
+                    'assets/images/logo_1000.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                  const Spacer(
+                    flex: 3,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.end,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).welcomeTitle,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
-                        )
-                      ],
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          _emailField(context),
+                          ConstWidgets.mSpacer,
+                          _passwordField(context),
+                          ConstWidgets.lSpacer,
+                          SizedBox(
+                            width: double.infinity,
+                            child: Button(
+                                buttonText: AppLocalizations.of(context).login,
+                                onPressed: () {
+                                  if (!_formKey.currentState!.validate()) {
+                                    return;
+                                  }
+                                  _login();
+                                }),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Button(
+                              buttonText: "Sign Up",
+                              onPressed: () {
+                                context.go('/login/registration');
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }
 
 Widget _emailField(BuildContext context) {
   return TextFormField(
-    onChanged: (value) {
-      context.read<LoginViewModel>().setEmail(value);
-    },
     decoration: const InputDecoration(
       prefixIcon: Icon(Icons.email),
       border: UnderlineInputBorder(),
@@ -119,9 +120,6 @@ Widget _emailField(BuildContext context) {
 
 Widget _passwordField(BuildContext context) {
   return TextFormField(
-    onChanged: (value) {
-      context.read<LoginViewModel>().setPassword(value);
-    },
     obscureText: true,
     decoration: const InputDecoration(
       prefixIcon: Icon(Icons.password),

@@ -7,6 +7,7 @@ import '../../core/auth/viewmodel/auth_view_model.dart';
 import '../viewmodel/home_screen_cubit.dart';
 import '../viewmodel/home_screen_state.dart';
 import '../../../models/core/user.dart';
+import 'detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<HomeScreenCubit>().fetchUsers();
+    Future.microtask(() => context.read<HomeScreenCubit>().fetchUsers());
   }
 
   List<int> lista = [10, 20, 50, 100, 200, 1000];
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      GoRouter.of(context).go('/detail');
+                      GoRouter.of(context).push('/detail/$index');
                     },
                     child: Card(
                       elevation: 4,

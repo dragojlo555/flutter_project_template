@@ -17,10 +17,14 @@ abstract class Themes {
     useMaterial3: true,
     // To use the playground font, add GoogleFonts package and uncomment
     fontFamily: GoogleFonts.roboto().fontFamily,
-  );
+  ).copyWith(
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+    TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+  }));
 
   static ThemeData lightTheme = FlexThemeData.light(
-    scheme: FlexScheme.blueWhale,
+    scheme: FlexScheme.blumineBlue,
     scaffoldBackground: Colors.white,
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
     blendLevel: 20,
@@ -29,10 +33,16 @@ abstract class Themes {
       blendOnLevel: 20,
       blendOnColors: false,
       inputDecoratorBorderType: FlexInputBorderType.underline,
+      appBarBackgroundSchemeColor: SchemeColor.primary,
     ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    useMaterial3: true,
+    useMaterial3: false,
     // To use the playground font, add GoogleFonts package and uncomment
     fontFamily: GoogleFonts.roboto().fontFamily,
   );
+  //     .copyWith(
+  //     pageTransitionsTheme: const PageTransitionsTheme(builders: {
+  //   TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+  //   TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+  // }));
 }
