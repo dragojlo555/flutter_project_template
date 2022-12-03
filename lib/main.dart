@@ -6,9 +6,9 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './styles/themes.dart';
 import 'config/router/router.dart';
-import 'features/core/auth/viewmodel/auth_view_model.dart';
-import 'features/core/settings/viewmodel/settings_view_model.dart';
-import 'features/dumy_feature/viewmodel/home_screen_cubit.dart';
+import 'features/core/auth/bloc/auth_view_model.dart';
+import 'features/core/settings/bloc/settings_view_model.dart';
+import 'features/dumy_feature/bloc/home_screen_cubit.dart';
 import 'utils/services/local_storage/shared_preferences_helper.dart';
 
 void main() async {

@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../common/widgets/button.dart';
 import '../../../../common/widgets/dialogs/progress_indicator.dart';
 import '../../../../constants/const_widgets.dart';
-import '../viewmodel/auth_view_model.dart';
 import '../../../../utils/validators/validators.dart';
+import '../bloc/auth_view_model.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);

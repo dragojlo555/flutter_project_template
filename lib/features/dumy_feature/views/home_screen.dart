@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../common/widgets/dialogs/error_dialog.dart';
 import '../../../common/widgets/main_drawer.dart';
-import '../../core/auth/viewmodel/auth_view_model.dart';
-import '../viewmodel/home_screen_cubit.dart';
-import '../viewmodel/home_screen_state.dart';
 import '../../../models/core/user.dart';
+import '../../core/auth/bloc/auth_view_model.dart';
+import '../bloc/home_screen_cubit.dart';
+import '../bloc/home_screen_state.dart';
 import 'detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {

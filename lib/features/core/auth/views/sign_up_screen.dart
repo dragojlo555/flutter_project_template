@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../common/widgets/button.dart';
 import '../../../../common/widgets/dialogs/progress_indicator.dart';
 import '../../../../constants/const_widgets.dart';
-import '../viewmodel/auth_view_model.dart';
+import '../bloc/auth_view_model.dart';
 import '../widgets/body.dart';
 import '../../../../utils/validators/validators.dart';
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/auth/viewmodel/auth_view_model.dart';
-import '../viewmodel/home_screen_cubit.dart';
-import '../viewmodel/home_screen_state.dart';
+
+import '../../core/auth/bloc/auth_view_model.dart';
+import '../bloc/home_screen_cubit.dart';
+import '../bloc/home_screen_state.dart';
 
 class DetailScreen extends StatelessWidget {
   final int idUser;

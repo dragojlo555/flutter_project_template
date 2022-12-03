@@ -6,8 +6,8 @@
 // tree, read text, and verify that the values of widgets properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/core/auth/viewmodel/auth_view_model.dart';
-import 'package:flutter_template/features/core/settings/viewmodel/settings_view_model.dart';
+import 'package:flutter_template/features/core/auth/bloc/auth_view_model.dart';
+import 'package:flutter_template/features/core/settings/bloc/settings_view_model.dart';
 import 'package:flutter_template/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 

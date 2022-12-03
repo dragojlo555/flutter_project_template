@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../base/model_view_base.dart';
-import '../../features/dumy_feature/viewmodel/home_screen_cubit.dart';
 import 'pages/auth/login_page.dart';
 import 'pages/auth/sign_up_page.dart';
 import 'pages/home/detail_page.dart';
