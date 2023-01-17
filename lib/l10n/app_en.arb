@@ -1,7 +1,16 @@
 {
   "welcomeTitle":"Welcome",
+  "language": "English",
+  "locale": "en",
   "@welcomeTitle": {
     "description": "First message in the app"
   },
-  "login": "Login"
+  "login": "Log In",
+  "signup":"Sign Up",
+  "enter_email": "Enter your email",
+  "enter_password": "Enter your password",
+  "reenter_password": "Re-enter your password",
+  "something_went_wrong": "Something went wrong",
+  "description": "Description",
+  "username": "Username"
 }

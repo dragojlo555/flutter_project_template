@@ -1,4 +1,6 @@
 {
   "welcomeTitle": "Willkommen",
-  "login": "Login"
+  "login": "Login",
+  "signup":"Sign Up"
+
 }

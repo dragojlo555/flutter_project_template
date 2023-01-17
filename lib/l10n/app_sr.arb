@@ -1,0 +1,15 @@
+{
+  "welcomeTitle":"Welcome",
+  "language": "Serbish",
+  "locale": "sr",
+  "@welcomeTitle": {
+    "description": "First message in the app"
+  },
+  "login": "Prijava",
+  "signup":"Registracija",
+  "enter_email": "Unesi email",
+  "enter_password": "Unesi password",
+  "reenter_password": "Potvrdi password",
+  "something_went_wrong": "Doslo je do greske",
+  "description": "Description"
+}

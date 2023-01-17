@@ -8,9 +8,6 @@ class RepoException implements Exception {
 
   @override
   String toString() {
-    return super.toString() +
-        message.toString() +
-        " failure: " +
-        failure.toString();
+    return "$message failure: $failure";
   }
 }

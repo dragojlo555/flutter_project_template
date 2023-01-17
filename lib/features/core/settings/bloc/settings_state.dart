@@ -1,10 +1,14 @@
 part of 'settings_cubit.dart';
 
-abstract class SettingsState extends Equatable {
-  const SettingsState();
-}
+class SettingsState extends Equatable {
+  final String languageCode;
 
-class SettingsInitial extends SettingsState {
+  const SettingsState({required this.languageCode});
+
+  SettingsState copyWith({String? languageCode}) {
+    return SettingsState(languageCode: languageCode ?? this.languageCode);
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [languageCode];
 }

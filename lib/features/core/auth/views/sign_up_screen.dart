@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../common/widgets/button.dart';
 import '../../../../common/widgets/dialogs/progress_indicator.dart';
+import '../../../../config/router/router_paths.dart';
+import '../../../../constants/assets_path.dart';
 import '../../../../constants/const_widgets.dart';
-import '../bloc/auth_view_model.dart';
+import '../bloc/auth_cubit.dart';
 import '../widgets/body.dart';
 import '../../../../utils/validators/validators.dart';
 
@@ -18,22 +21,22 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _onLoading() async {
+    void onLoading() async {
       showDialog(
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
             return const ProgressIndicatorDialog();
           });
-      bool result = await context.read<AuthViewModel>().logIn();
+      bool result = await context.read<AuthCubit>().logIn();
       if (result) {
-        GoRouter.of(context).go('/');
+        GoRouter.of(context).go(RouterPaths.home);
       }
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: Text(AppLocalizations.of(context).signup),
       ),
       body: Body(
         child: Form(
@@ -48,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                     flex: 1,
                   ),
                   Image.asset(
-                    'assets/images/logo_1000.png',
+                    AppAssets.logoHeadline,
                     width: 200,
                     height: 200,
                   ),
@@ -68,12 +71,12 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: Button(
-                        buttonText: "Sign Up",
+                        buttonText:  AppLocalizations.of(context).signup,
                         onPressed: () {
                           if (!_formKey.currentState!.validate()) {
                             return;
                           }
-                          _onLoading();
+                          onLoading();
                         }),
                   ),
                 ],
@@ -86,10 +89,10 @@ class SignUpScreen extends StatelessWidget {
   Widget _emailField(BuildContext context) {
     return TextFormField(
         controller: emailTEC,
-        decoration: const InputDecoration(
-          icon: Icon(Icons.email),
-          border: UnderlineInputBorder(),
-          labelText: "Enter your email",
+        decoration: InputDecoration(
+          icon:const Icon(Icons.email),
+          border:const UnderlineInputBorder(),
+          labelText:  AppLocalizations.of(context).enter_email,
         ),
         validator: (value) {
           return Validators.validEmail(value!);
@@ -100,10 +103,10 @@ class SignUpScreen extends StatelessWidget {
     return TextFormField(
       controller: passwordTEC,
       obscureText: true,
-      decoration: const InputDecoration(
-        icon: Icon(Icons.password),
-        border: UnderlineInputBorder(),
-        labelText: "Enter your password",
+      decoration: InputDecoration(
+        icon:const Icon(Icons.password),
+        border:const UnderlineInputBorder(),
+        labelText:  AppLocalizations.of(context).enter_password,
       ),
       validator: (value) {
         return Validators.validPassword(value!);
@@ -115,10 +118,10 @@ class SignUpScreen extends StatelessWidget {
     return TextFormField(
       controller: confirmPasswordTEC,
       obscureText: true,
-      decoration: const InputDecoration(
-        icon: Icon(Icons.password),
-        border: UnderlineInputBorder(),
-        labelText: "Re-enter your password",
+      decoration:  InputDecoration(
+        icon:const Icon(Icons.password),
+        border:const UnderlineInputBorder(),
+        labelText:  AppLocalizations.of(context).reenter_password,
       ),
       validator: (value) {
         return Validators.validConfirmPassword(value!, passwordTEC.text);

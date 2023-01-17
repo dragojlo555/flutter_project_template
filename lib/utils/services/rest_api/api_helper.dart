@@ -19,10 +19,10 @@ class ApiBaseHelper {
       ..interceptors
           .add(InterceptorsWrapper(onRequest: (options, handler) async {
         // Get your JWT token
-        print("REQUEST URI: " +
-            options.uri.toString() +
-            '\n SEND BODY DATA: ' +
-            options.data.toString());
+        // print("REQUEST URI: " +
+        //     options.uri.toString() +
+        //     '\n SEND BODY DATA: ' +
+        //     options.data.toString());
         //{options.headers["Authorization"] = "Bearer $token"});
         return handler.next(options); //continue
         // If you want to resolve the request with some custom data，
@@ -66,6 +66,7 @@ class ApiBaseHelper {
     } on DioError catch (e) {
       _handleError(e);
     }
+    return null;
   }
 
   Future<Response?> postHTTP(
@@ -79,6 +80,7 @@ class ApiBaseHelper {
     } on DioError catch (e) {
       _handleError(e);
     }
+    return null;
   }
 
   Future<Response?> putHTTP(String url, dynamic data) async {
@@ -89,6 +91,7 @@ class ApiBaseHelper {
     } on DioError catch (e) {
       _handleError(e);
     }
+    return null;
   }
 
   Future<Response?> patchHTTP(String url, dynamic data) async {
@@ -99,6 +102,7 @@ class ApiBaseHelper {
     } on DioError catch (e) {
       _handleError(e);
     }
+    return null;
   }
 
   Future<Response?> deleteHTTP(String url) async {
@@ -109,6 +113,7 @@ class ApiBaseHelper {
     } on DioError catch (e) {
       _handleError(e);
     }
+    return null;
   }
 
   _handleError(e) {

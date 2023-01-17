@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../core/auth/bloc/auth_view_model.dart';
+import '../../core/auth/bloc/auth_cubit.dart';
 import '../bloc/home_screen_cubit.dart';
 import '../bloc/home_screen_state.dart';
 
@@ -21,7 +20,7 @@ class DetailScreen extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                context.read<AuthViewModel>().logOut();
+                context.read<AuthCubit>().logOut();
                 context.go('/login');
               },
               child: const Text('Back to home')),

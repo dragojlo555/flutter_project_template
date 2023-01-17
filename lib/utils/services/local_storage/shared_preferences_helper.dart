@@ -22,8 +22,8 @@ class SharedPreferencesHelper {
     await prefs.setString(AppConstants.sharedPreferencesLanguage, languageCode);
   }
 
-  static Future<String?> getLanguageCode() async {
+  static Future<String> getLanguageCode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppConstants.sharedPreferencesLanguage);
+    return prefs.getString(AppConstants.sharedPreferencesLanguage) ?? 'en';
   }
 }

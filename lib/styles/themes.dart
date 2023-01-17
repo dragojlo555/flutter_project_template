@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 abstract class Themes {
   static ThemeData darkTheme = FlexThemeData.dark(
-    scheme: FlexScheme.blueWhale,
+    scheme: FlexScheme.sakura,
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
     blendLevel: 15,
     appBarStyle: FlexAppBarStyle.background,
@@ -24,7 +24,7 @@ abstract class Themes {
   }));
 
   static ThemeData lightTheme = FlexThemeData.light(
-    scheme: FlexScheme.blumineBlue,
+    scheme: FlexScheme.sakura,
     scaffoldBackground: Colors.white,
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
     blendLevel: 20,

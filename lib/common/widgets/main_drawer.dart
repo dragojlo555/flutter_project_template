@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../constants/assets_path.dart';
 
 class MainDrawer extends StatelessWidget {
   final Function onPressed;
@@ -28,13 +30,13 @@ class MainDrawer extends StatelessWidget {
                   CircleAvatar(
                     radius: 70,
                     child: ClipRRect(
-                      child: SvgPicture.asset('assets/images/avatar_placeholder2.svg'),
                       borderRadius: BorderRadius.circular(70.0),
+                      child: SvgPicture.asset(AppAssets.dummyAvatar),
                     ),
                   ),
-                  const Text(
-                    "Username",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  Text(
+                    AppLocalizations.of(context).username,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )
                 ],
               ),

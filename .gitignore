@@ -8,6 +8,8 @@
 .buildlog/
 .history
 .svn/
+#uncomment part related to env before start of project
+#*.env
 
 # IntelliJ related
 *.iml

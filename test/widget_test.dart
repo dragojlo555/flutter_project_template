@@ -6,8 +6,8 @@
 // tree, read text, and verify that the values of widgets properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/core/auth/bloc/auth_view_model.dart';
-import 'package:flutter_template/features/core/settings/bloc/settings_view_model.dart';
+import 'package:flutter_template/features/core/auth/bloc/auth_cubit.dart';
+import 'package:flutter_template/features/core/settings/bloc/settings_cubit.dart';
 import 'package:flutter_template/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,8 +15,8 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
-      authService: AuthViewModel(''),
-      settingsViewModel: SettingsViewModel('en'),
+      authCubit: AuthCubit(token: ''),
+      settingsCubit: SettingsCubit(languageCode: 'en'),
     ));
 
     // Verify that our counter starts at 0.

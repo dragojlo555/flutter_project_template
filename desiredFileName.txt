@@ -1,1 +1,16 @@
-{}
+{
+  "de": [
+    "language",
+    "locale",
+    "enter_email",
+    "enter_password",
+    "reenter_password",
+    "something_went_wrong",
+    "description",
+    "username"
+  ],
+
+  "sr": [
+    "username"
+  ]
+}

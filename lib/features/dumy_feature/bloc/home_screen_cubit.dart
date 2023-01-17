@@ -13,7 +13,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       UserList users = await dummyRepository.getUserList();
       emit(state.copyWith(userList: users, status: HomeScreenStatus.completed));
     } catch (ex) {
-      print('HANDLING ERROR: ' + ex.toString());
       //OVDE IZHENDLATI ERROR I PRIKAZATI KORISNIKU ODGOVARAJUCU PORUKU TAKO STO CE SE SETOVATI FAILURE U STATE-U
     }
   }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../common/widgets/dialogs/error_dialog.dart';
 import '../../../common/widgets/main_drawer.dart';
+import '../../../config/router/router_paths.dart';
 import '../../../models/core/user.dart';
-import '../../core/auth/bloc/auth_view_model.dart';
+import '../../core/auth/bloc/auth_cubit.dart';
 import '../bloc/home_screen_cubit.dart';
 import '../bloc/home_screen_state.dart';
-import 'detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -35,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         drawer: MainDrawer(
           onPressed: () {
-            context.read<AuthViewModel>().logOut();
-            GoRouter.of(context).go('/login');
+            BlocProvider.of<AuthCubit>(context, listen: false).logOut();
+            // GoRouter.of(context).go('/login');
           },
         ),
         appBar: AppBar(),
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (state.status == HomeScreenStatus.error) {
               showDialog(
                 context: context,
-                builder: (context) => const ErrorDialog(content: "Something went wrong"),
+                builder: (context) => ErrorDialog(content: AppLocalizations.of(context).something_went_wrong),
               );
             }
           }, builder: (context, state) {
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      GoRouter.of(context).push('/detail/$index');
+                      GoRouter.of(context).push('${RouterPaths.detail}+$index');
                     },
                     child: Card(
                       elevation: 4,
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               state.userList!.entries[index].username!,
                               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            const Text("Description"),
+                             Text( AppLocalizations.of(context).description),
                           ],
                         ),
                       ),

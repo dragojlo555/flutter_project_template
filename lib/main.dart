@@ -4,59 +4,61 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import './styles/themes.dart';
 import 'config/router/router.dart';
-import 'features/core/auth/bloc/auth_view_model.dart';
-import 'features/core/settings/bloc/settings_view_model.dart';
+import 'features/core/auth/bloc/auth_cubit.dart';
+import 'features/core/settings/bloc/settings_cubit.dart';
 import 'features/dumy_feature/bloc/home_screen_cubit.dart';
 import 'utils/services/local_storage/shared_preferences_helper.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   setPathUrlStrategy();
-  String? languageCode = await SharedPreferencesHelper.getLanguageCode();
+  String languageCode = await SharedPreferencesHelper.getLanguageCode();
   String? token = await SharedPreferencesHelper.getToken();
-  final AuthViewModel authService = AuthViewModel(token);
-  final SettingsViewModel settingsViewModel = SettingsViewModel(languageCode);
+  final AuthCubit authCubit = AuthCubit(token: token);
+  final SettingsCubit settingsCubit = SettingsCubit(languageCode: languageCode);
 
   runApp(MyApp(
-    authService: authService,
-    settingsViewModel: settingsViewModel,
+    authCubit: authCubit,
+    settingsCubit: settingsCubit,
   ));
 }
 
 class MyApp extends StatelessWidget {
-  late final AuthViewModel authService;
-  late final SettingsViewModel settingsViewModel;
+  late final SettingsCubit settingsCubit;
+  late final AuthCubit authCubit;
 
-  late final GoRouter mg_router = GoRouter(
+  late final GoRouter mgRouter = GoRouter(
       initialLocation: '/',
       routes: appRoutes,
-      redirect: (state) {
-        //   print('REGISTRATION STATUSL ' + state.location);
-        //   if (state.location == '/' && registrationViewModel.registrationStatus != RegistrationStatus.REGISTER) {
-        //     print('OVDEE');
-        //     return '/registration';
-        //   }
+      routerNeglect: true,
+      redirect: (context, routerState) {
+        if (routerState.location == '/' && authCubit.state.authStatus != AuthCubitStatus.authenticated) {
+          return '/login';
+        }
         return null;
       });
 
-  MyApp({Key? key, required this.authService, required this.settingsViewModel}) : super(key: key);
+  MyApp({Key? key, required this.settingsCubit, required this.authCubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //Example using .env file
+    // print(dotenv.env['ESCAPED_DOLLAR_SIGN']);
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (_) => authService,
-          ),
           BlocProvider<HomeScreenCubit>(create: (context) => HomeScreenCubit()),
-          ChangeNotifierProvider(
-            create: (_) => settingsViewModel,
-          ),
+          BlocProvider<AuthCubit>(create: (context) => authCubit),
+          BlocProvider<SettingsCubit>(
+            create: (context) => settingsCubit,
+          )
         ],
         child: MainWidget(
-          router: mg_router,
+          router: mgRouter,
         ));
   }
 }
@@ -68,17 +70,30 @@ class MainWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      locale: Locale(context.watch<SettingsViewModel>().languageCode!),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
-      themeMode: ThemeMode.light,
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
+    return BlocListener<AuthCubit, AuthState>(
+      listenWhen: (previousState,currentState){
+        return previousState.authStatus==AuthCubitStatus.authenticated && currentState.authStatus==AuthCubitStatus.unauthenticated;
+      },
+      listener: (context, state) {
+        if(state.authStatus==AuthCubitStatus.unauthenticated){
+          router.go('/login');
+        }
+      },
+      child: MaterialApp.router(
+        locale: Locale(context
+            .watch<SettingsCubit>()
+            .state
+            .languageCode),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        theme: Themes.lightTheme,
+        darkTheme: Themes.darkTheme,
+        themeMode: ThemeMode.light,
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
+      ),
     );
   }
 }
